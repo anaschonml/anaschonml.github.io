@@ -1,0 +1,4 @@
+https://www.youtube.com/watch?v=laCjGMhASp8
+    iintro to web audio api
+https://developer.mozilla.org/en-US/play
+https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode 

@@ -1,0 +1,166 @@
+<!--creates a web-based synthesizer that responds in real time-->
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>websyn</title>
+        <meta name="description" content="browser-based synthesizer" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <header>
+            <h1>WebSyn: a Web-based synthesizer</h1>
+            <a href="/instructions"><button class="navbutton">How to use WebSyn</button></a>
+        </header>
+        <main>
+            <div id="master">
+
+                <label for="mastervolume">Master volume</label>
+                <input type="range" name="mastervolume" id="mastervolume" min="0" max="2" value="1" step="0.01" class="slider" />
+                <button name="muteall" id="muteall" class="bigbutton">Stop All Audio</button>
+                <button onClick="window.location.reload();" class="bigbutton">Reset</button>
+            </div>
+            <div class="adsrdiv" id="adsrdata">
+                <input type="range" class="adsr" name="attack" id="attack" min="0.01" max="1" value="0" step="0.01" />
+                <label for="attack" id="alabel">attack time: </label>
+
+                <input type="range" class="adsr" name="decay" id="decay" min="0.01" max="1" value="1" step="0.01" />
+                <label for="attack" id="dlabel">decay time: </label>
+
+                <input type="range" class="adsr" name="sustain" id="sustain" min="0.01" max="1" value="1" step="0.01" />
+                <label for="attack" id="slabel">sustain volume: </label>
+
+                <input type="range" class="adsr" name="release" id="release" min="0.005" max="3" value="0.1" step="0.001" />
+                <label for="release" id="rlabel">release time: </label>
+            </div>
+            <table id="toptable">
+                <tr>
+                    <td>
+                        <div name="octcontrol" id="octcontrol">
+                            <p class="paraname">Octave</p>
+                            <button class="smallbtn" name="octdwn" id="octdwn">-</button>
+                            <button class="smallbtn" name="octup" id="octup">+</button>
+                            <p class="small">you can control this with the Z and X keys on your keyboard!</p>
+                        </div>
+
+                    </td>
+                    <td>
+                        <div class="oscbalance" id="oscbalance">
+                            <label for="oscbalance" class="paraname" id="oscbaltxt">wave shape balance: </label>
+                            <br>
+                            <span class="paraname">wave 1:</span>
+                            <select name="waveL" id="waveL">
+                                <option value="sine">sine</option>
+                                <option value="square">square</option>
+                                <option value="triangle">triangle</option>
+                                <option value="sawtooth">saw</option>
+                            </select>
+                            <input type="range" class="bal" name="oscbal" id="oscbal" min="0" max="1" value="0.5" step="0.01">
+                            <span class="paraname">wave 2:</span>
+                            <select name="waveR" id="waveR">
+                                <option value="sine">sine</option>
+                                <option value="square">square</option>
+                                <option value="triangle">triangle</option>
+                                <option value="sawtooth" selected>saw</option>
+                            </select>
+                        </div>
+
+                    </td>
+                </tr>
+
+            </table>
+            <div name="keyboardiv" id="keyboardiv" class="keyboard">
+                <p id="empty"></p>
+                <p class="small">you can play notes using the middle and upper rows of your keyboard!</p>
+            </div>
+            <div id="fx">
+                <h4>Effects</h4>
+                <table name="fxtab" class="fxtab">
+                    <tr>
+                        <td name="filters" id="filters" class="filterdiv">
+                            <h5>filters</h5>
+
+                            <table>
+                                <tr class="paraname">
+                                    <td>high-pass</td>
+                                    <td>bell</td>
+                                    <td>low-pass</td>
+                                </tr>
+                                <tr>
+                                    <td id="hpdata">
+                                        <input type="range" class="filter" name="hpf" id="hpf" min="0" max="5000" value="20" step="10">
+                                        <br>
+                                        <label for="hpf">frequency:</label>
+
+                                    </td>
+                                    <td id="bpdata">
+                                        <input type="range" class="filter" name="bpfreq" id="bpfreq" min="20" max="20000" value="500" step="10">
+                                        <br>
+                                        <label for="bpfreq">frequency:</label>
+                                        <br id="bpfbr">
+                                        <input type="range" class="filter" name="bpfq" id="bpfq" min="0" max="4" value="0.5" step="0.5">
+                                        <br>
+                                        <label for="bpfq">Q:</label>
+                                        <br id="bpqbr">
+                                        <input type="range" class="filter" name="bpfg" id="bpfg" min="-24" max="18" value="0" step="0.5">
+                                        <br>
+                                        <label for="bpfg">gain:</label>
+                                        <br id="bpgbr">
+                                    </td>
+                                    <td id="lpdata">
+                                        <input type="range" class="filter" name="lpf" id="lpf" min="300" max="20000" value="19900" step="10">
+                                        <br>
+                                        <label for="lpf">frequency:</label>
+                                    </td>
+
+
+
+                                </tr>
+
+                            </table>
+                        </td>
+
+
+                        <td name="distortiondata" id="distortiondata">
+                            <h5>Distortion</h5>
+                            <label for="distamt">Amount:</label>
+                            <br id="distbr">
+                            <input type="range" class="filter" name="distControl" id="distControl" min="0" max="10" value="0.0" step="0.01">
+                        </td>
+                        <td name="dlydata" id="dlydata">
+                            <h5 class="paraname">Delay</h5>
+                            <input type="range" class="filter" name="dlytime" id="dlytime" min="0" max="2.5" value="0.3" step="0.001">
+                            <label for="dlytime">Time (s):</label>
+                            <br id="dlytbr">
+                            <input type="range" class="filter" name="dlyfb" id="dlyfb" min="0" max="1" value="0.4" step="0.01">
+                            <label for="dlyfb">Feedback:</label>
+                            <br id="dlyfbr">
+                            <input type="range" class="filter" name="dlymix" id="dlymix" min="0" max="1" value="0.0" step="0.01">
+                            <label for="dlymix">Mix:</label>
+                            <br id="dlymbr">
+
+                        </td>
+                    </table>
+                </div>
+                <h5 id="record">Record</h5><br>
+                <div name="record" id="recordiv">
+                    <button class="recbutton" id="recstart" name="recstart">Start</button>
+                    <button class="recbutton" id="recstop" name="recstop">Stop</button>
+                    <audio id="recording" name="recording" controls></audio>
+                    <label for="recording" class="info">right click to download</label>
+                </div>
+            </tr>
+        </div>
+    </main>
+    <footer>
+        <p>Made by Ana Schon as a final project for CS50</p>
+    </footer>
+    <script src="audio.js"></script>
+</body>

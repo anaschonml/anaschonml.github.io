@@ -1,0 +1,247 @@
+body {
+    background-color: #A2B9B7;
+
+    font-family: 'Varela Round', sans-serif;
+
+}
+
+header {
+    text-align: center;
+    padding: 1%;
+}
+
+main {
+    background-color: #E1E8E6;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 1%;
+    width: 80%;
+    margin: auto;
+}
+
+footer {
+    vertical-align: bottom;
+    text-align: center;
+    padding: 1%;
+}
+
+button {
+    background-color: #136A4E;
+    border-radius: 3px;
+    color: #E1E8E6;
+    font: bold;
+    padding: 8px;
+}
+
+button:hover {
+    filter: brightness(90%);
+}
+
+button:active {
+    filter: saturate(200%);
+}
+
+table {
+    width: 100%;
+    margin: 10px;
+}
+
+td {
+    border-collapse: collapse;
+    border: 10px solid #E1E8E6;
+    background-color: #A2B9B7;
+    padding: 10px;
+    align-items: top;
+}
+
+td tr:first-child td {
+    border-bottom: 0;
+    position: relative;
+}
+
+td tr:first-child td::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    bottom: -2px;
+    height: 2px;
+    background: #E1E8E6;
+}
+
+td tr:last-child td {
+    border-top: 0;
+}
+
+.navbutton {
+    border: 1px;
+    width: 22%;
+}
+
+#master {
+    display: flex;
+    align-items: center;
+    padding: 1%;
+    width: 100%;
+    margin: auto;
+}
+
+.oscbalance {
+    text-align: center;
+}
+
+.bigbutton {
+    margin-left: 30px;
+}
+
+/*https://stackoverflow.com/questions/18389224/how-to-style-html5-range-input-to-have-different-color-before-and-after-slider*/
+
+input[type='range'] {
+    height: 15px;
+}
+
+/*coloring slider back*/
+/*Chrome*/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    input[type='range'] {
+        overflow: hidden;
+        -webkit-appearance: none;
+        background-color: #FFFFFF;
+    }
+
+    input[type='range']::-webkit-slider-runnable-track {
+        height: 10px;
+        -webkit-appearance: none;
+        color: #13bba4;
+        margin-top: -1px;
+        opacity: 70%;
+    }
+
+    input[type='range']::-webkit-slider-runnable-track:hover {
+        opacity: 100%;
+    }
+
+
+    input[type='range']::-webkit-slider-thumb {
+        width: 10px;
+        -webkit-appearance: none;
+        height: 10px;
+        cursor: ew-resize;
+        background: #136A4E;
+        box-shadow: -80px 0 0 80px #136A4E;
+    }
+
+}
+
+/** FF*/
+input[type="range"]::-moz-range-progress {
+    background-color: #136A4E;
+    height: 100%;
+    cursor: ew-resize;
+    opacity: 70%;
+}
+
+input[type="range"]::-moz-range-progress:hover {
+    opacity: 100%;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 1px;
+    background-color: #136A4E;
+    border: 0px;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+    opacity: 100%;
+}
+
+/* IE*/
+input[type="range"]::-ms-fill-lower {
+    background-color: #136A4E;
+}
+
+input[type="range"]::-ms-fill-upper {
+    background-color: #FFFFFF;
+}
+
+audio {
+    padding: 10px;
+}
+
+.slider {
+    height: 30px;
+    width: 200px;
+    background: #A2B9B7;
+    outline: none;
+}
+
+.adsr {
+    -webkit-appearance: none;
+    height: 20px;
+    background: #A2B9B7;
+    outline: none;
+}
+
+.bal {
+    width: 300px;
+}
+
+.whtKey {
+    height: 200px;
+    width: 90px;
+    vertical-align: top;
+    color: black;
+    background: white;
+    text-align: center;
+}
+
+.whtkey:active {
+    opacity: 60;
+}
+
+.blkKey {
+    height: 130px;
+    width: 70px;
+    vertical-align: top;
+    color: white;
+    background: black;
+}
+
+.blkKey:active {
+    opacity: 60%;
+
+}
+
+.keyboard {
+    background-color:
+        padding:1%;
+    width: 1500px;
+    margin: auto;
+}
+
+.pressed {
+    opacity: 60%;
+}
+
+.smallbtn {
+    margin-right: 5px;
+    border: 1px;
+    height: 28px;
+    width: 30px;
+    border-radius: 3px;
+}
+
+.recbutton {
+    height: 50px;
+    width: 50px;
+}
+
+#recordiv {
+    display: flex;
+    align-items: center;
+    padding: 1%;
+}
+
+.small {
+    font-size: 9pt;
+    font-style: italic;
+}

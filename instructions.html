@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <title>websyn</title>
+        <meta name="description" content="browser-based synthesizer" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <header>
+            <h1>WebSyn: a Web-based synthesizer</h1>
+            <a href="/index"><button class="navbutton">Return to main page</button></a>
+        </header>
+        <main>
+            <p>Here are some tools and definitions to make using WebSyn easier!</p>
+            <br>
+            <p><b>WebSyn is currently not designed for mobile users. Full functionality will only work on desktop</b> (on any modern browser).
+                Very old computers might have trouble using it. <br>The main functionality is audio output, so a way to listen to audio is essential.
+                It is also made for a standard English language keyboard, so alternative layouts might have trouble <br>with the functionality
+                (for example, the Spanish language keyboard has a ñ instead of a ;, and the German keyboard has the Z and Y keys swapped
+                relative to the QWERTY layout). <br><a href="https://www.daskeyboard.com/blog/how-to-change-keyboard-language/">Here</a> is some info on
+                changing your computer's keyboard language if you need to.</p>
+            <div id="masterinst">
+                <input type="range" name="mastervolume" id="mastervolume" min="0" max="2" value="1" step="0.01" />
+                <label for="mastervolume">Master volume</label>
+                <p>Defines how loud the synthesizer is.</p>
+            </div>
+            <div class="adsrdiv" id="adsrdata">
+                <input type="range" class="adsr" name="attack" id="attack" min="0.01" max="1" value="0" step="0.01" />
+                <label for="attack" id="alabel">attack time: </label>
+                <p>Defines how long it takes for the note to go from 0 to full volume in seconds.</p>
+
+                <input type="range" class="adsr" name="decay" id="decay" min="0.01" max="1" value="1" step="0.01" />
+                <label for="attack" id="dlabel">decay time: </label>
+                <p>Defines how long it takes for the note to go from full volume to sustain level in seconds, while the note is being held.</p>
+
+
+                <input type="range" class="adsr" name="sustain" id="sustain" min="0.01" max="1" value="1" step="0.01" />
+                <label for="attack" id="slabel">sustain volume: </label>
+                <p>Defines the sustain level as a percentage of the full volume, which is held until the note is released.</p>
+
+
+                <input type="range" class="adsr" name="release" id="release" min="0.005" max="3" value="0.1" step="0.001" />
+                <label for="release" id="rlabel">release time: </label>
+                <p>Defines how long it takes for the level of the note to go from the sustain volume to 0 after the note is released (so, once you are not playing it anymore).</p>
+            </div>
+
+            <div name="octcontrol" id="octcontrol">
+                <p class="paraname">Octave</p>
+                <button class="smallbtn" name="octdwn" id="octdwn">-</button>
+                <button class="smallbtn" name="octup" id="octup">+</button>
+                <p>These buttons raise (+) and lower (-) the octave of the notes being played. You can also control them with the <b>Z</b> and <b>X</b> notes on your computer keyboard.</p>
+            </div>
+
+            <div class="oscbalance" id="oscbalance">
+                <label for="oscbalance" class="paraname" id="oscbaltxt">wave shape balance: </label>
+                <br>
+                <span class="paraname">wave 1:</span>
+                <select name="waveL" id="waveL">
+                    <option value="sine">sine</option>
+                    <option value="square">square</option>
+                    <option value="triangle">triangle</option>
+                    <option value="sawtooth">saw</option>
+                </select>
+                <input type="range" class="bal" name="oscbal" id="oscbal" min="0" max="1" value="0.5" step="0.01">
+                <span class="paraname">wave 2:</span>
+                <select name="waveR" id="waveR">
+                    <option value="sine">sine</option>
+                    <option value="square">square</option>
+                    <option value="triangle">triangle</option>
+                    <option value="sawtooth" selected>saw</option>
+                </select>
+                <p>WebSyn plays 2 oscillators at once. These menus let you choose from a series of different wave shapes what kind of wave you're hearing. The available wave shapes are:<br></p>
+                <img src="/images/waveforms.png" class="darkimg">
+                <p class="small">Source: Omegatron, CC BY-SA 3.0, <a href="https://creativecommons.org/licenses/by-sa/3.0">link</a>, via Wikimedia Commons</p>
+                <p><br> The slider balances how much of each you're hearing. 0 means you're only hearing the left waveshape, 1 only the right.</p>
+            </div>
+
+            <div name="keyboardiv" id="keyboardiv">
+                <p id="empty"></p>
+                <h3>Playing the keyboard:</h3>
+                <p>You can play the keyboard by clicking on the key buttons on the screen, as well as using your computer keyboard:</p>
+                <img src="/images/kbdletters.png">
+                <p>This lets you not only play more comfortably, but also several notes at once!
+                    <br><i>Comment: a known bug (which you can feel free to exploit) is if the same key is pressed several times in quick succession there is a high chance a note will start and never stop, creating an "infinite note".<br>
+                        Unfortunately, the only way to stop this is to reload the page.</i>
+                </p>
+
+            </div>
+            <div id="fx">
+                <h4>Effects</h4>
+                <h5>filters</h5>
+
+                <table>
+                    <tr class="paraname">
+                        <td>low-pass</td>
+                        <td>bell</td>
+                        <td>high-pass</td>
+                    </tr>
+                    <tr>
+                        <td id="hpdata">
+                            <input type="range" class="filter" name="hpf" id="hpf" min="0" max="5000" value="20" step="10">
+                            <br>
+                            <label for="hpf">frequency:</label>
+                            <br>
+                            <p>A high-pass filter only "lets through" frequencies above its cutoff frequency and attenuates those below it. Use the "frequency" slider to adjust the cutoff frequency.<br></p>
+                            <img src="/images/hpf.png">
+                            <p class="small">Source: <a href="https://manual.audacityteam.org/man/high_pass_filter.html">Audacity Manual</a></p>
+                        </td>
+                        <td id="bpdata">
+                            <input type="range" class="filter" name="bpfreq" id="bpfreq" min="20" max="20000" value="500" step="10">
+                            <br>
+                            <label for="bpfreq">frequency:</label>
+                            <br id="bpfbr">
+                            <input type="range" class="filter" name="bpfq" id="bpfq" min="0" max="4" value="0.5" step="0.5">
+                            <br>
+                            <label for="bpfq">Q:</label>
+                            <br id="bpqbr">
+                            <input type="range" class="filter" name="bpfg" id="bpfg" min="-24" max="18" value="0" step="0.5">
+                            <br>
+                            <label for="bpfg">gain:</label>
+                            <br id="bpgbr">
+                            <p>A bell or peaking filter selects a frequency (adjusted with the "frequency" slider) and turns it up or down by a value defined by the "gain" slider. The "Q" slider defines how many frequencies around the central one will be affected (a higher Q means fewer frequencies).</p>
+                            <img src="/images/bpf.png" height="300">
+                            <img src="/images/bpfq.png" height="300">
+                            <p class="small">Source: <a href="https://www.tonmeister.ca/wordpress/2018/02/06/bo-tech-a-very-brief-introduction-to-parametric-equalisation/">Earfluff and Eyecandy</a> </p>
+                        </td>
+                        <td id="lpdata">
+                            <input type="range" class="filter" name="lpf" id="lpf" min="300" max="20000" value="19900" step="10">
+                            <br>
+                            <label for="lpf">frequency:</label>
+                            <p>A low-pass filter only "lets through" frequencies below its cutoff frequency and attenuates those above it. Use the "frequency" slider to adjust the cutoff frequency.</p>
+                            <img src="/images/lpf.png">
+                            <p class="small">Source: <a href="https://manual.audacityteam.org/man/low_pass_filter.html">Audacity Manual</a></p>
+
+                        </td>
+
+
+                    </tr>
+
+                </table>
+            </td>
+
+
+            <div name="distortiondata" id="distortiondata">
+                <h5>Distortion</h5>
+                <label for="distamt">Amount:</label>
+                <br id="distbr">
+                <input type="range" class="filter" name="distControl" id="distControl" min="0" max="10" value="0.0" step="0.01">
+                <p>Adds distortion!</p>
+            </div>
+            <div name="dlydata" id="dlydata">
+                <h5 class="paraname">Delay</h5>
+                <input type="range" class="filter" name="dlytime" id="dlytime" min="0" max="2.5" value="0.3" step="0.001">
+                <label for="dlytime">Time (s):</label>
+                <br id="dlytbr">
+                <input type="range" class="filter" name="dlyfb" id="dlyfb" min="0" max="1" value="0.4" step="0.01">
+                <label for="dlyfb">Feedback:</label>
+                <br id="dlyfbr">
+                <input type="range" class="filter" name="dlymix" id="dlymix" min="0" max="1" value="0.0" step="0.01">
+                <label for="dlymix">Mix:</label>
+                <br id="dlymbr">
+                <p>A delay! "Time" defines how many seconds between repeats, "feedback" what proportion of the repeated audio gets delayed again, and "mix" how loud it is compared to the full volume of the dry signal.</p>
+            </div>
+        </div>
+        <div name="record">
+            <h5 id="record">Record</h5>
+            <button class="recbutton" id="recstart" name="recstart">Start</button>
+            <button class="recbutton" id="recstop" name="recstop">Stop</button>
+            <audio id="recording" name="recording" controls></audio>
+            <p>To record audio, press "start" and play whatever melody you want! To stop, press "stop". You can now listen to what you recorded and download it by right (or control-)clicking and choosing "Save Audio As..." or similar depending on your OS.
+                <br>Tip: you can change parameters of the sound while recording!
+            </p>
+        </div>
+    </tr>
+</div>
+</main>
+<footer>
+    <p>Made by Ana Schon as a final project for CS50</p>
+</footer>
+</body>
