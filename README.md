@@ -31,4 +31,4 @@ The delay effect repeats the sound it receives after a certain amount of time de
 
 The last feature allows the user to record what they play with WebSyn, listen to the recording, and download it as an .ogg file, which can be opened with Reaper, Pro Tools, Audacity, and many other Digital Audio Workstations. The recording begins when they press "start" and ends when they press "stop". Once the data is available, the audio player is populated with what was just recorded and pressing play allows the user to listen to it. By right- or control-clicking on the audio player (when it is not actively playing), the user can save the file through their OS's "Save Audio As..." dialog. There isn't a defined limit on the length of the recording, as it is only stored client-side, but I would discourage very long performances because they can create a really large file. Starting to record again after a file has been created will overwrite the previous one, so users should make sure to save their creation before making a new one.
 
-Hope you have fun playing WebSyn!
+Hope you have fun playing WebSyn!!
